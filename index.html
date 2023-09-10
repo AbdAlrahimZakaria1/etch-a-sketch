@@ -4,6 +4,35 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <link rel="stylesheet" href="styles/style.css" />
+    <script src="js/main.js" defer></script>
   </head>
-  <body></body>
+  <header class="flex-center header">
+    <h1 class="title center-text --primary-color">Etch a sketch!</h1>
+  </header>
+  <body class="flex-direction-column">
+    <main class="game flex-center flex-direction-column flex">
+      <div class="game-container flex-center">
+        <div class="controls flex-center flex-direction-column">
+          <div class="color-input-wrapper">
+            <input type="color" value="#ff0000" id="color-picker" />
+          </div>
+          <button id="color-mode" class="control-btn selected selectable">
+            color mode
+          </button>
+          <button id="rainbow-mode" class="control-btn selectable">
+            rainbow color
+          </button>
+          <button id="eraser" class="control-btn selectable">eraser</button>
+          <button class="control-btn clear">clear</button>
+          <p class="size-output text">16 x 16</p>
+          <input id="size-slider" type="range" min="1" max="100" value="16" class="slider"></input>
+        </div>
+        <div class="grids-container"></div>
+      </div>
+    </main>
+  </body>
+  <footer class="footer flex-center">
+    <h3>Copyright Lypophrenia</h3>
+  </footer>
 </html>
