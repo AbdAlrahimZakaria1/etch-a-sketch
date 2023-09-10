@@ -47,11 +47,12 @@ body {
 }
 
 .title {
-  font-size: 64px;
+  font-size: 96px;
+  font-weight: 64px;
 }
 
 .header {
-  height: 100px;
+  height: 200px;
   align-items: flex-end;
 }
 

@@ -1,8 +1,9 @@
 const DEFAULT_GRID_SIZE = 16;
 const GRID_DIMENSION = 600;
-const DEFAULT_COLOR = "#0f0f0f";
 const PRIMARY_COLOR = "#333333";
 const WHITE_COLOR = "#ffffff";
+
+let isDrawing = false;
 
 function getColorValue() {
   color = document.querySelector("#color-picker").value;
@@ -22,13 +23,16 @@ function getRandomColor() {
   }
   return color;
 }
+
 function eraserMode(e) {
   e.target.style.backgroundColor = WHITE_COLOR;
 }
+
 function colorMode(e) {
   const colorValue = getColorValue();
   e.target.style.backgroundColor = colorValue;
 }
+
 function rainbowColorMode(e) {
   const randomColor = getRandomColor();
   e.target.style.backgroundColor = randomColor;
@@ -58,6 +62,24 @@ function selectActionBtn(e) {
   selectedBtn.classList.remove("selectable");
 }
 
+function paint(divElement) {
+  divElement.addEventListener("mousedown", function (divElement) {
+    isDrawing = true;
+    modifyDiv(divElement);
+  });
+  divElement.addEventListener("mousemove", function (divElement) {
+    if (isDrawing) {
+      modifyDiv(divElement);
+    }
+  });
+  divElement.addEventListener("mouseup", function (divElement) {
+    if (isDrawing) {
+      modifyDiv(divElement);
+      isDrawing = false;
+    }
+  });
+}
+
 function setUpGrid(gridSize = DEFAULT_GRID_SIZE) {
   let gridDimension = GRID_DIMENSION / gridSize;
   const grid = document.querySelector(".grids-container");
@@ -65,7 +87,7 @@ function setUpGrid(gridSize = DEFAULT_GRID_SIZE) {
     const div = document.createElement("div");
     div.style.cssText = `min-width: ${gridDimension}px; height: ${gridDimension}px;`;
     div.classList.add("grid-cell");
-    div.addEventListener("click", modifyDiv);
+    paint(div);
     grid.appendChild(div);
   }
 }
@@ -86,6 +108,7 @@ function changeGridSize(e) {
 
   setUpGrid(sizeValue);
 }
+
 function initializeEventLoaders() {
   const clearGridBtn = document.querySelector(".control-btn.clear");
   clearGridBtn.addEventListener("click", clearGrid);
